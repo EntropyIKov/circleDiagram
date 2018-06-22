@@ -1,0 +1,53 @@
+<head>
+	<meta charset="UTF-8">
+	<style>
+		* {
+			-webkit-box-sizing: border-box;
+			   -moz-box-sizing: border-box;
+			        box-sizing: border-box;
+		    margin: 0;
+		    padding: 0;
+		}
+
+		.control-block {
+			position: absolute;
+			top: 50px;
+			right: 50px;
+			border: 1px solid black;
+			background: #FCFCFC;
+		}
+	</style>
+	<script src="tavernDiagram.js"></script>
+</head>
+<body>
+	<canvas id="diag" width="400" height="400"></canvas>
+	<input type="number" id="newSectorValueInput" placeholder="Enter new value">
+	<input type="button" id="addSectorButton" value="Add">
+	<br><br><br><br>
+	<p id="valueArrayList">Array is empty</p>
+	<script>
+		function setNewArrayList(list) {
+			var listEl = document.getElementById('valueArrayList');
+			listEl.innerText = 'Array: ' + list;
+		}
+
+		var btn = document.getElementById('addSectorButton');
+		btn.addEventListener('click', function (argument) {
+			var input = document.getElementById('newSectorValueInput');
+			
+			tavernDiagram.addSector(parseInt(input.value), true);
+			input.value = "";
+			setNewArrayList(tavernDiagram.sectorValueArray);
+		})
+	</script>
+	<script>
+		options = {
+			targetId: "diag",
+			offset: 30,
+			initValueArray: [10, 20, 30],
+		};
+		tavernDiagram.init(options);
+		tavernDiagram.draw();
+		setNewArrayList(tavernDiagram.sectorValueArray);
+	</script>
+</body>
